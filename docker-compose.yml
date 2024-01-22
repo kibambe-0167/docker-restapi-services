@@ -1,0 +1,48 @@
+version: '3.7'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    environment:
+      POSTGRES_USER: dancingponysvc
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: dancingpony
+    volumes:
+      - postgres_data_2:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+
+  authservice:
+    build: 
+      context: ./auth_service
+    container_name: authservice
+    command: yarn start
+    volumes:
+      - ./auth_service:/apps/thedancingpony_authservice
+    ports:
+      - 3030:3000
+    depends_on:
+      - postgres
+    restart: unless-stopped
+
+  dishservice:
+    build: 
+      context: ./dish_service
+    container_name: dishservice
+    command: yarn start
+    volumes:
+      - ./dish_service:/apps/thedancingpony_dishservice
+    ports:
+      - 3031:3000
+    depends_on:
+      - postgres
+    restart: unless-stopped
+
+
+
+
+
+volumes:
+  postgres_data_2:

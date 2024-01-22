@@ -1,0 +1,8 @@
+
+
+### initial route
+GET http://localhost:3000
+
+
+### setup database tables
+GET http://localhost:3000/setup
