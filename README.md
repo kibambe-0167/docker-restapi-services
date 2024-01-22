@@ -21,9 +21,9 @@
 
 
 ### My notes
-- git push origin master
+- 
 
-### connect to db from bash
+### connect to pgsq db from bash
 
 - docker exec -it postgres bash <!-- go into interactive mode of the named container -->
 psql -h localhost -p 5432 -U dancingponysvc -d dancingpony
